@@ -1,0 +1,23 @@
+restartable skippable scheme("[androidx.compose.ui.UiComposable]") fun DevClusterScreen()
+restartable skippable scheme("[androidx.compose.ui.UiComposable]") fun Metric(
+  stable label: String
+  stable value: Int
+  stable modifier: Modifier? = @static Companion
+)
+restartable skippable scheme("[androidx.compose.ui.UiComposable]") fun DevClusterPreview()
+restartable skippable scheme("[androidx.compose.ui.UiComposable]") fun HardwareSearchBar(
+  stable searchQuery: String
+  stable onQueryChange: Function1<String, Unit>
+  stable modifier: Modifier? = @static Companion
+)
+restartable skippable scheme("[androidx.compose.ui.UiComposable]") fun HardwareCard(
+  stable item: HardwareItem
+  stable allocatedCount: Int
+  stable expanded: Boolean
+  stable onToggleDetails: Function0<Unit>
+  stable onAllocate: Function0<Unit>
+  stable modifier: Modifier? = @static Companion
+)
+restartable skippable scheme("[0, [0]]") fun DevClusterTheme(
+  stable content: Function2<Composer, Int, Unit>
+)

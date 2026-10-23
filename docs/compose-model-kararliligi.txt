@@ -1,0 +1,10 @@
+unstable class MainActivity {
+  <runtime stability> = Unstable
+}
+stable class HardwareItem {
+  stable val id: String
+  stable val name: String
+  stable val category: String
+  stable val cost: Double
+  stable val stockCount: Int
+}
