@@ -41,32 +41,3 @@ APK: `app/build/outputs/apk/debug/app-debug.apk`.
 | `ui/DevClusterScreen.kt` | Merkezi durum, remember/rememberSaveable, filtre önbelleği ve LazyColumn. |
 | `ui/HardwareComponents.kt` | Stateless arama çubuğu ve donanım kartı. |
 | `ui/theme/Theme.kt` | Uygulamanın renkleri. |
-
-## Ödev koşulları
-
-| Koşul | Uygulama |
-|---|---|
-| `@Immutable`, bütün alanlar `val` | `HardwareItem` |
-| `remember` | Harcama, kalan stok, güncel envanter ve kategori listesi |
-| `rememberSaveable` | Arama, kategori, ayırma sayıları, açılan kart ve oturum mesajı |
-| Filtre önbelleği | `remember(searchQuery, selectedCategory)` |
-| LazyColumn ve benzersiz key | `items(filteredHardware, key = { it.id })` |
-| Stateless alt bileşenler | `HardwareCard`, `HardwareSearchBar`; içinde yerel remember yok |
-| State Down / Events Up | Parametreler ve `onQueryChange`, `onAllocate`, `onToggleDetails` |
-| Modifier sırası | Kart içeriğinde `.clickable(...).padding(18.dp)` |
-
-Filtre sabit katalog üzerinde çalışır ve yalnızca arama veya kategori değiştiğinde yeniden hesaplanır. Stok değişince arama tekrarlanmaz; bulunan kimliklerin güncel stokları ayrı bir remember bloğunda alınır. Kategori filtrelendiği için selectedCategory de anahtardır.
-
-## Doğrulama — 23 Ekim 2026
-
-- Debug APK derlemesi başarılı.
-- Altı proje mantık testi ve şablondan gelen bir örnek JUnit testi geçti.
-- Android 16 / API 36 flutter_emulator cihazında 7/7 test geçti (6 proje senaryosu + 1 örnek paket testi). Arama sırasında gerçek Activity yeniden oluşturularak yatay döndürme, stok/harcama restorasyonu, kategori ve sorgu birleşimi, son stok ve sıfırlama, sıfır stok, boş sonuç kontrol edildi.
-- Android Lint başarılı, hata yok; şablon kaynakları, sürüm güncellemeleri ve hedef SDK hakkında uyarılar var.
-- Emülatör Android Studio üzerinden başlatıldı; cihaz testleri ve dikey/yatay görsel inceleme tamamlandı. İlk komut satırı başlatmasındaki sanallaştırma sorunu bu yolla aşıldı. Windows özellikleri değiştirilmedi.
-
-Hızlı manuel kontrol: Pixel ara → bir adet ayır → stok 7 ve harcama $999.00 olmalı → ekranı döndür → arama, stok ve harcama korunmalı. HHKB aramasında ayırma düğmesi kapalı olmalı. Threadripper bir kez ayrılabilmeli. Sıfırlama bütün stokları başlangıca döndürmeli.
-
-
-Derleyici doğrulaması: HardwareItem stable; HardwareCard ve HardwareSearchBar restartable skippable. Raporları üretmek için: .\gradlew.bat :app:compileDebugKotlin -PcomposeReports=true --rerun-tasks. Ana derleme tamamlanınca app/build/compose-reports klasörünü okuyun; test derlemesi aynı isimli raporları değiştirebilir.
-
